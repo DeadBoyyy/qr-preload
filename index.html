@@ -1,21 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Precarga de Número de Serie</title>
+    <title>Generador de QR para Número de Serie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 5px 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h2>Ingresa el Número de Serie</h2>
+        <input type="text" id="serialInput" placeholder="Ej: 123456789">
+        <br><br>
+        <button onclick="generateQR()">Generar y Redirigir</button>
+    </div>
+
     <script>
-        // Obtener el parámetro 'serial' de la URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const serial = urlParams.get('serial');
-        if (serial) {
-            // Redirigir a la página de Canal Directo
-            window.location.href = 'https://webclientes.canaldirecto.com.ar/incidents/add';
-            // Usar setTimeout para asegurarse de que la página cargue antes de llenar el campo
-            setTimeout(() => {
-                // Llenar el campo con el número de serie
-                document.getElementById('NumeroDeSerie').value = serial;
-            }, 1000); // Ajusta el tiempo si es necesario
+        function generateQR() {
+            // Obtener el valor del input
+            const serial = document.getElementById('serialInput').value.trim();
+            if (serial) {
+                // Redirigir a la página de Canal Directo con el número de serie
+                window.location.href = 'https://webclientes.canaldirecto.com.ar/incidents/add';
+                // Usar setTimeout para llenar el campo después de que la página cargue
+                setTimeout(() => {
+                    document.getElementById('NumeroDeSerie').value = serial;
+                }, 1000); // Ajusta el tiempo si es necesario
+            } else {
+                alert("Por favor, ingresa un número de serie.");
+            }
         }
     </script>
 </body>
