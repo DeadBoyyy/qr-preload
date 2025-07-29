@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Precarga de Número de Serie</title>
+</head>
+<body>
+    <script>
+        // Obtener el parámetro 'serial' de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const serial = urlParams.get('serial');
+        if (serial) {
+            // Redirigir a la página de Canal Directo
+            window.location.href = 'https://webclientes.canaldirecto.com.ar/incidents/add';
+            // Usar setTimeout para asegurarse de que la página cargue antes de llenar el campo
+            setTimeout(() => {
+                // Llenar el campo con el número de serie
+                document.getElementById('NumeroDeSerie').value = serial;
+            }, 1000); // Ajusta el tiempo si es necesario
+        }
+    </script>
+</body>
+</html>
